@@ -1,0 +1,21 @@
+:root {
+  --bg-page: #F5F5F3;
+  --ink-main: #0F0F0F;
+  --ink-muted: #666666;
+  --accent: #E24A2A;
+  --card-bg: #FFFFFF;
+
+  --color-primary: #3E241B;
+  --color-sec1: #C4A882;
+  --color-sec2: #F5EDD8;
+
+  --font-display: 'Syne', sans-serif;
+  --font-ui: 'Inter', sans-serif;
+
+  --gutter: 2vw;
+  --section-pad: clamp(4rem, 6vw, 8rem);
+  --radius-lg: 0px;
+  /* 💡 SHARP CORNERS */
+
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+}
