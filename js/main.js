@@ -61,19 +61,17 @@ document.addEventListener("DOMContentLoaded", function () {
         backToTop.addEventListener('click', (e) => { e.preventDefault(); lenis.scrollTo(0, { duration: 1.5 }); });
     }
 
-    /* --- 6. TYPOGRAPHY SCRAMBLE --- */
+    /* --- 6. TYPOGRAPHY SCRAMBLE (SEO SAFE) --- */
     const scrambleElements = document.querySelectorAll('.scramble-text');
     const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%&*';
 
     scrambleElements.forEach(el => {
-        // 💡 FIX: Use textContent instead of innerText so it reads hidden text
-        const originalText = el.textContent.trim();
+        const originalText = el.getAttribute('data-text') || el.textContent.trim();
         let scrambleInterval;
         const triggerScramble = () => {
             let iterations = 0;
             clearInterval(scrambleInterval);
             scrambleInterval = setInterval(() => {
-                // 💡 FIX: Update the text using textContent
                 el.textContent = originalText.split('').map((char, index) => {
                     if (index < iterations || char === ' ') return originalText[index];
                     return chars[Math.floor(Math.random() * chars.length)];
@@ -85,24 +83,9 @@ document.addEventListener("DOMContentLoaded", function () {
         setInterval(triggerScramble, 2000);
     });
 
-    /* --- 7. PROJECT REVEAL (SCROLL GLITCH FIXED) --- */
-    const nextBtn = document.getElementById('next-project-btn');
-    if (nextBtn) {
-        nextBtn.addEventListener('click', function (e) {
-            e.preventDefault();
-            const hiddenContent = document.getElementById('hidden-content');
-            hiddenContent.style.display = 'block';
-
-            // 💡 FIX: 100ms breather for the browser to paint before scrolling
-            setTimeout(() => {
-                ScrollTrigger.refresh();
-                lenis.scrollTo('#project-02', { duration: 1.5, offset: 0 });
-            }, 100);
-        });
-    }
 });
 
-/* 💡 FIX: Secure clipboard copy for local testing */
+/* Secure clipboard copy */
 function copyHex(hex, el) {
     if (navigator.clipboard && window.isSecureContext) {
         navigator.clipboard.writeText(hex);
